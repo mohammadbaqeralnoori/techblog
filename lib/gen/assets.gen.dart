@@ -38,6 +38,13 @@ class $AssetsIconsGen {
   AssetGenImage get profileNavIcon =>
       const AssetGenImage('assets/icons/profileNavIcon.png');
 
+  /// File path: assets/icons/techBot.png
+  AssetGenImage get techBotPng =>
+      const AssetGenImage('assets/icons/techBot.png');
+
+  /// File path: assets/icons/techBot.svg
+  String get techBotSvg => 'assets/icons/techBot.svg';
+
   /// File path: assets/icons/tehRaido.png
   AssetGenImage get tehRaido =>
       const AssetGenImage('assets/icons/tehRaido.png');
@@ -50,7 +57,7 @@ class $AssetsIconsGen {
       const AssetGenImage('assets/icons/writeNavIcon.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [
+  List<dynamic> get values => [
         pencilOnBook,
         podCastVoice,
         profileIcon,
@@ -58,6 +65,8 @@ class $AssetsIconsGen {
         hashTag,
         homeNavIcon,
         profileNavIcon,
+        techBotPng,
+        techBotSvg,
         tehRaido,
         voice,
         writeNavIcon

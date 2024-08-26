@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:techblog/my_colors.dart';
+import 'package:techblog/view/register_intro.dart';
 import 'package:techblog/view/splash_screen.dart';
 void main() {
   // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
             ),
             headlineLarge: TextStyle(
               fontFamily: 'dana',
-              fontSize: 35,
+              fontSize: 17,
               fontWeight: FontWeight.w300,
               color: Color.fromARGB(255, 66, 4, 87)
             ),
@@ -55,7 +56,7 @@ class MyApp extends StatelessWidget {
                 color: solidColors.posterSubTitle),
             bodySmall: TextStyle(
               fontFamily: 'dana',
-              fontSize: 30,
+              fontSize: 15,
               fontWeight: FontWeight.w700,
               color: Color.fromARGB(255, 0, 0, 0)
             ), 
@@ -81,7 +82,8 @@ class MyApp extends StatelessWidget {
                 fontWeight: FontWeight.w700,
                 color: Color.fromARGB(255, 197, 197, 197)),
           )),
-      home: const splashScreen()
+      // home: const splashScreen()
+      home: const RegisterIntro()
       );
     
   }

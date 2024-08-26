@@ -23,6 +23,7 @@ class solidColors {
   static const Color labelTitle = Color.fromARGB(255, 44, 125, 180);
   static const Color arwbackBg = Color.fromARGB(255, 151, 120, 175);
   static const Color arwback = Color.fromARGB(255, 255, 255, 255);
+  static const Color divider = Color.fromARGB(255, 112, 112, 112);
 }
 
 

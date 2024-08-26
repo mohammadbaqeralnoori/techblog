@@ -19,29 +19,33 @@ class homeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          homePagePoster(size: size, textTheme: textTheme),
-          const SizedBox(
-            height: 16,
-          ),
-          homePageTageList(bodyMargin: bodyMargin, textTheme: textTheme),
-          const SizedBox(
-            height: 32,
-          ),
-          seeMoreBlog(bodyMargin: bodyMargin, textTheme: textTheme),
-          homePageBlogList(
-              size: size, bodyMargin: bodyMargin, textTheme: textTheme),
-          const SizedBox(
-            height: 32,
-          ),
-          seeMorePadCast(bodyMargin: bodyMargin, textTheme: textTheme),
-          homePagePodCastList(
-              size: size, bodyMargin: bodyMargin, textTheme: textTheme),
-          const SizedBox(
-            height: 65,
-          ),
-        ],
+      physics: const BouncingScrollPhysics(),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+        child: Column(
+          children: [
+            homePagePoster(size: size, textTheme: textTheme),
+            const SizedBox(
+              height: 16,
+            ),
+            homePageTageList(bodyMargin: bodyMargin, textTheme: textTheme),
+            const SizedBox(
+              height: 32,
+            ),
+            seeMoreBlog(bodyMargin: bodyMargin, textTheme: textTheme),
+            homePageBlogList(
+                size: size, bodyMargin: bodyMargin, textTheme: textTheme),
+            const SizedBox(
+              height: 32,
+            ),
+            seeMorePadCast(bodyMargin: bodyMargin, textTheme: textTheme),
+            homePagePodCastList(
+                size: size, bodyMargin: bodyMargin, textTheme: textTheme),
+            const SizedBox(
+              height: 65,
+            ),
+          ],
+        ),
       ),
     );
   }
