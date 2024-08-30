@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:techblog/my_colors.dart';
-import 'package:techblog/view/register_intro.dart';
-import 'package:techblog/view/splash_screen.dart';
+import 'package:techblog/view/my_cats.dart';
+// import 'package:techblog/view/profile_screen.dart';
+// import 'package:techblog/view/main_screen.dart';
+// import 'package:techblog/view/register_intro.dart';
+// import 'package:techblog/view/splash_screen.dart';
+
+
 void main() {
   // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
   //   statusBarColor: solidColors.statusBarColor,
@@ -19,6 +24,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     var textTheme = Theme.of(context).textTheme;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
@@ -30,13 +36,33 @@ class MyApp extends StatelessWidget {
         Locale('fa', ''), // Farsi
       ],
       theme: ThemeData(
+        inputDecorationTheme: InputDecorationTheme(
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(16),
+          borderSide: const BorderSide(width: 2))
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(style:  ButtonStyle(
+                textStyle: WidgetStateProperty.resolveWith((states) {
+                  if (states.contains(WidgetState.pressed)) {
+                    return textTheme.displaySmall;
+                  }
+                    return textTheme.titleSmall;
+                  
+                }),
+                backgroundColor: WidgetStateProperty.resolveWith((states) {
+                  if (states.contains(WidgetState.pressed)) {
+                    return SolidColors.seeMore;
+                  }
+                    return SolidColors.primeryColor;
+                  
+                }),
+              ), ),
           fontFamily: 'dana',
           textTheme: const TextTheme(
             headlineSmall: TextStyle(
                 fontFamily: 'dana',
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
-                color: solidColors.posterTitle),
+                color: SolidColors.posterTitle),
             headlineMedium: TextStyle(
               fontFamily: 'dana',
               fontSize: 14,
@@ -53,7 +79,7 @@ class MyApp extends StatelessWidget {
                 fontFamily: 'dana',
                 fontSize: 14,
                 fontWeight: FontWeight.w300,
-                color: solidColors.posterSubTitle),
+                color: SolidColors.posterSubTitle),
             bodySmall: TextStyle(
               fontFamily: 'dana',
               fontSize: 15,
@@ -64,26 +90,26 @@ class MyApp extends StatelessWidget {
               fontFamily: 'dana',
               fontSize: 14,
               fontWeight: FontWeight.w700,
-              color: solidColors.colorTitle
+              color: SolidColors.colorTitle
             ), 
             bodyLarge: TextStyle(
                 fontFamily: 'dana',
-                fontSize: 40,
+                fontSize: 14,
                 fontWeight: FontWeight.w500,
                 color: Color.fromARGB(255, 70, 70, 70)),
             labelSmall: TextStyle(
                 fontFamily: 'dana',
-                fontSize: 30,
+                fontSize: 14,
                 fontWeight: FontWeight.w300,
-                color: Color.fromARGB(255, 44, 125, 180)),
+                color: SolidColors.hintText),
             labelMedium: TextStyle(
                 fontFamily: 'dana',
                 fontSize: 29,
                 fontWeight: FontWeight.w700,
                 color: Color.fromARGB(255, 197, 197, 197)),
           )),
-      // home: const splashScreen()
-      home: const RegisterIntro()
+      // home: const SplashScreen()
+      home: const MyCats()
       );
     
   }

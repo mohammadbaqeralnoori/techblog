@@ -4,14 +4,14 @@ import 'package:techblog/gen/assets.gen.dart';
 import 'package:techblog/view/main_screen.dart';
 import 'package:techblog/my_colors.dart';
 
-class splashScreen extends StatefulWidget {
-  const splashScreen({super.key});
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
 
   @override
-  State<splashScreen> createState() => _splashScreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _splashScreenState extends State<splashScreen> {
+class _SplashScreenState extends State<SplashScreen> {
 
 @override
   void initState() {
@@ -41,7 +41,7 @@ class _splashScreenState extends State<splashScreen> {
                 ),
                 const SizedBox(height: 32,),
                 const SpinKitFadingCube(
-                  color: solidColors.primeryColor,
+                  color: SolidColors.primeryColor,
                   size: 32.0,
                 )
               ],

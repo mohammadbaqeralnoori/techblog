@@ -11,8 +11,10 @@ class MainScreen extends StatefulWidget {
   State<MainScreen> createState() => _MainScreenState();
 }
 
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
 class _MainScreenState extends State<MainScreen> {
   var selectedPageIndex = 0;
+
 
   @override
   Widget build(BuildContext context) {
@@ -21,15 +23,73 @@ class _MainScreenState extends State<MainScreen> {
     double bodyMargin = size.width / 10;
     return SafeArea(
       child: Scaffold(
+        key: _key,
+        drawer: Drawer(
+          backgroundColor: SolidColors.scafoldBg,
+          child: Padding(
+            padding: EdgeInsets.only(right: bodyMargin, left: bodyMargin),
+            child: ListView(
+              children: [
+                DrawerHeader(
+                    child: Center(
+                        child: Image.asset(
+                  Assets.images.tecSplash.path, scale: 3,
+                ))),
+                ListTile(
+                  title: Text("پروفایل کاربری", style: textTheme.bodySmall,),
+                  onTap: () {
+                    
+                  },
+                ),
+                const Divider(
+                  color: SolidColors.divider,
+                ),
+                ListTile(
+                  title: Text("درباره تک‌بلاگ", style: textTheme.bodySmall,),
+                  onTap: () {
+                    
+                  },
+                ),
+                const Divider(
+                  color: SolidColors.divider,
+                ),
+                ListTile(
+                  title: Text("اشتراک گذاری تک بلاگ", style: textTheme.bodySmall,),
+                  onTap: () {
+                    
+                  },
+                ),
+                const Divider(
+                  color: SolidColors.divider,
+                ),
+                ListTile(
+                  title: Text("تک‌بلاگ در گیت هاب", style: textTheme.bodySmall,),
+                  onTap: () {
+                    
+                  },
+                ),
+                const Divider(
+                  color: SolidColors.divider,
+                ),
+              ],
+            ),
+          ),
+        ),
         appBar: AppBar(
-          backgroundColor: solidColors.scafoldBg,
+          automaticallyImplyLeading: false,
+          backgroundColor: SolidColors.scafoldBg,
           elevation: 0,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              const Icon(
-                Icons.menu,
-                color: Colors.black,
+              InkWell(
+                onTap: () {
+                 _key.currentState!.openDrawer();
+                },
+                child: const Icon(
+                  Icons.menu,
+                  color: Colors.black,
+                ),
               ),
               Image(
                 image: Assets.images.tecSplash.provider(),
@@ -47,24 +107,22 @@ class _MainScreenState extends State<MainScreen> {
             padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
             child: Stack(
               children: [
-                Center(
-                  child: Positioned.fill(
-                    child: IndexedStack(
-                      index: selectedPageIndex,
-                      children: [
-                        homeScreen(
-                            size: size,
-                            textTheme: textTheme,
-                            bodyMargin: bodyMargin),
-                        profileScreen(
-                            size: size,
-                            textTheme: textTheme,
-                            bodyMargin: bodyMargin),
-                      ],
-                    ),
+                Positioned.fill(
+                  child: IndexedStack(
+                    index: selectedPageIndex,
+                    children: [
+                      HomeScreen(
+                          size: size,
+                          textTheme: textTheme,
+                          bodyMargin: bodyMargin),
+                      ProfileScreen(
+                          size: size,
+                          textTheme: textTheme,
+                          bodyMargin: bodyMargin),
+                    ],
                   ),
                 ),
-                bottomNav(
+                BottomNav(
                   size: size,
                   bodyMargin: bodyMargin,
                   changeScreen: (int value) {
@@ -82,10 +140,8 @@ class _MainScreenState extends State<MainScreen> {
   }
 }
 
-class widget {}
-
-class bottomNav extends StatelessWidget {
-  const bottomNav({
+class BottomNav extends StatelessWidget {
+  const BottomNav({
     super.key,
     required this.size,
     required this.bodyMargin,
@@ -99,24 +155,26 @@ class bottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      bottom: 0,
+      bottom: 8,
       right: 0,
       left: 0,
       child: Container(
         height: size.height / 10,
         decoration: const BoxDecoration(
             gradient: LinearGradient(
-                colors: gradiantColors.bottomNavBg,
+                colors: GradiantColors.bottomNavBg,
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter)),
         child: Padding(
-          padding:
-              EdgeInsets.only(right: bodyMargin, left: bodyMargin, bottom: 5),
+          padding: EdgeInsets.only(
+            right: bodyMargin,
+            left: bodyMargin,
+          ),
           child: Container(
             height: size.height / 8,
             decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(18)),
-                gradient: LinearGradient(colors: gradiantColors.bottomNav)),
+                gradient: LinearGradient(colors: GradiantColors.bottomNav)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [

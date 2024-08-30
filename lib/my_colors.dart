@@ -2,7 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 
-class solidColors {
+class SolidColors {
   static const Color primeryColor = Color.fromARGB(255, 68, 4, 87);
   static const Color colorTitle = Color.fromARGB(255, 40, 107, 184);
   static const Color seeMore = Color.fromARGB(255, 40, 107, 184);
@@ -24,10 +24,12 @@ class solidColors {
   static const Color arwbackBg = Color.fromARGB(255, 151, 120, 175);
   static const Color arwback = Color.fromARGB(255, 255, 255, 255);
   static const Color divider = Color.fromARGB(255, 112, 112, 112);
+  static const Color hintText = Color.fromARGB(255, 219, 219, 219);
+  static const Color surface = Color.fromARGB(255, 242, 242, 242);
 }
 
 
-class gradiantColors {
+class GradiantColors {
   static const List<Color> bottomNav = [Color.fromARGB(255, 25, 0, 94),  Color.fromARGB(255, 68, 4, 87)];
   static const List<Color> bottomNavBg = [Color.fromARGB(0, 255, 255, 255),  Color.fromARGB(255, 255, 255, 255)];
   static const List<Color> tags = [Color.fromARGB(255, 6, 6, 6),  Color.fromARGB(255, 60, 60, 60)];

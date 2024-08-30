@@ -14,8 +14,8 @@ Map homePagePosterMap = {
 
 List<HashTagModel> tagList = [
   HashTagModel(title: "جاوا"),
-  HashTagModel(title: "برنامه نویسی وب"),
-  HashTagModel(title: "پادکست رادیو کدیاد"),
+  HashTagModel(title: "برنامه نویسی"),
+  HashTagModel(title: "پادکست رادیو"),
   HashTagModel(title: "PHP"),
   HashTagModel(title: "C++"),
   HashTagModel(title: "Html"),
@@ -24,7 +24,7 @@ List<HashTagModel> tagList = [
   HashTagModel(title: "Flutter"),
 ];
 
-
+List<HashTagModel> swlwctedTags = [];
 
 List<BlogModel> blogList = [
   BlogModel(

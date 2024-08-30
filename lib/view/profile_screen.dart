@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:techblog/gen/assets.gen.dart';
-import 'package:techblog/models/fake_data.dart';
 import 'package:techblog/my_colors.dart';
 import 'package:techblog/my_component.dart';
 import 'package:techblog/my_strings.dart';
 
-class profileScreen extends StatelessWidget {
-  const profileScreen({
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({
     super.key,
     required this.size,
     required this.textTheme,
@@ -28,7 +27,7 @@ class profileScreen extends StatelessWidget {
             image: Assets.icons.profileIcon.provider(),
             height: 100,
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Row(
@@ -36,18 +35,18 @@ class profileScreen extends StatelessWidget {
             children: [
               ImageIcon(
                 Assets.icons.bluePen.provider(),
-                color: solidColors.seeMore,
+                color: SolidColors.seeMore,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 8,
               ),
               Text(
-                myStrings.imageProfileEdit,
+                MyStrings.imageProfileEdit,
                 style: textTheme.bodyMedium,
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 60,
           ),
           Text(
@@ -58,46 +57,46 @@ class profileScreen extends StatelessWidget {
             "fatemeamiri@gmail.com",
             style: textTheme.bodySmall,
           ),
-          SizedBox(
+          const SizedBox(
             height: 40,
           ),
-          techDivider(size: size),
+          TechDivider(size: size),
           InkWell(
             onTap: (() {}),
-            splashColor: solidColors.primeryColor,
+            splashColor: SolidColors.primeryColor,
             child: SizedBox(
                 height: 45,
                 child: Center(
                     child: Text(
-                  myStrings.myFavArticleText,
+                  MyStrings.myFavArticleText,
                   style: textTheme.bodySmall,
                 ))),
           ),
-          techDivider(size: size),
+          TechDivider(size: size),
           InkWell(
             onTap: (() {}),
-            splashColor: solidColors.primeryColor,
+            splashColor: SolidColors.primeryColor,
             child: SizedBox(
                 height: 45,
                 child: Center(
                     child: Text(
-                  myStrings.myFavPodCastsText,
+                  MyStrings.myFavPodCastsText,
                   style: textTheme.bodySmall,
                 ))),
           ),
-          techDivider(size: size),
+          TechDivider(size: size),
           InkWell(
             onTap: (() {}),
-            splashColor: solidColors.primeryColor,
+            splashColor: SolidColors.primeryColor,
             child: SizedBox(
                 height: 45,
                 child: Center(
                     child: Text(
-                  myStrings.logOutText,
+                  MyStrings.logOutText,
                   style: textTheme.bodySmall,
                 ))),
           ),
-        SizedBox(
+        const SizedBox(
             height: 50,
           ),
         ],

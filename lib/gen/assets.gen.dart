@@ -27,6 +27,10 @@ class $AssetsIconsGen {
   /// File path: assets/icons/bluePen.png
   AssetGenImage get bluePen => const AssetGenImage('assets/icons/bluePen.png');
 
+  /// File path: assets/icons/downArowIcon.png
+  AssetGenImage get downArowIcon =>
+      const AssetGenImage('assets/icons/downArowIcon.png');
+
   /// File path: assets/icons/hashTag.png
   AssetGenImage get hashTag => const AssetGenImage('assets/icons/hashTag.png');
 
@@ -62,6 +66,7 @@ class $AssetsIconsGen {
         podCastVoice,
         profileIcon,
         bluePen,
+        downArowIcon,
         hashTag,
         homeNavIcon,
         profileNavIcon,
