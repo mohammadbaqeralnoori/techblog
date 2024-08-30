@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:techblog/my_colors.dart';
+import 'package:techblog/component/my_colors.dart';
 import 'package:techblog/view/my_cats.dart';
 // import 'package:techblog/view/profile_screen.dart';
 // import 'package:techblog/view/main_screen.dart';
