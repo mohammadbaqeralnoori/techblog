@@ -13,10 +13,17 @@ class MyStrings {
   static const String insertYourEmail = "لطفا ایمیلت رو وارد کن";
   static const String activateCode = "کد فعال سازی رو وارد کن ";
   static const String choessCats = "دسته بندی هایی که دوست داری رو انتخاب کن";
+  static const String techBlogGithubUrl= "https://github.com/sasansafari/techblog";
   static const String wellcome = """به تک‌بلاگ خوش اومدی
 
 برای ارسال مطلب و پادکست باید حتما 
 ثبت نام کنی """;
+  static const String shareText = """
+من از تگ بلاگ استفاده می کنم و خیلی با حاله و تو هم داشته باش\n
+
+www.sasansafari.com
+
+""";
 
   static const String successfullRegistration = """ تبریک میگم ، ایمیل با موفقیت تایید شد
 لطفا اطلاعات ثبت نام رو کامل کن """;
