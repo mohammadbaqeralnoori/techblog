@@ -1,5 +1,4 @@
-import 'dart:math';
-
+import 'dart:developer';
 import 'package:dio/dio.dart';
 
 class DioService {
@@ -11,9 +10,9 @@ class DioService {
             options: Options(responseType: ResponseType.json, method: 'GET'))
         .then(
       (response) {
-        log(response.toString() as num);
+        log(response.toString());
         return response;
       },
     );
-   }
+  }
 }
