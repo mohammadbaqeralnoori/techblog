@@ -2,12 +2,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:techblog/controller/home_screen_controller.dart';
+import 'package:techblog/controller/single_article_controller.dart';
 import 'package:techblog/gen/assets.gen.dart';
 import 'package:techblog/models/fake_data.dart';
 import 'package:techblog/component/my_colors.dart';
 import 'package:techblog/component/my_strings.dart';
 import 'package:techblog/component/my_component.dart';
+import 'package:techblog/view/artical_list_screen.dart';
 
+// ignore: must_be_immutable
 class HomeScreen extends StatelessWidget {
   HomeScreen({
     super.key,
@@ -17,7 +20,7 @@ class HomeScreen extends StatelessWidget {
   });
 
   HomeScreenController homeScreenController = Get.put(HomeScreenController());
-
+  SingleArticleController singleArticleController = Get.put(SingleArticleController());
   final Size size;
   final TextTheme textTheme;
   final double bodyMargin;
@@ -27,32 +30,36 @@ class HomeScreen extends StatelessWidget {
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Obx(
-       () => Padding(
+        () => Padding(
           padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-          child: homeScreenController.loading == false ?
-             Column(
-              children: [
-                poster(),
-                const SizedBox(
-                  height: 16,
-                ),
-                HomePageTageList(bodyMargin: bodyMargin, textTheme: textTheme),
-                const SizedBox(
-                  height: 32,
-                ),
-                SeeMoreBlog(bodyMargin: bodyMargin, textTheme: textTheme),
-                topVisited(),
-                const SizedBox(
-                  height: 32,
-                ),
-                SeeMorePadCast(bodyMargin: bodyMargin, textTheme: textTheme),
-                topPodCastes(),
-                const SizedBox(
-                  height: 65,
-                ),
-              ],
-            )
-           : const Center(child: loading()),
+          // ignore: unrelated_type_equality_checks
+          child: homeScreenController.loading == false
+              ? Column(
+                  children: [
+                    poster(),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    tags(),
+                    const SizedBox(
+                      height: 32,
+                    ),
+                    GestureDetector(
+                      onTap: () => Get.to(ArticleListScreen(title: 'مقالات',)),
+                      child: SeeMoreBlog(bodyMargin: bodyMargin, textTheme: textTheme)),
+                    topVisited(),
+                    const SizedBox(
+                      height: 32,
+                    ),
+                    SeeMorePadCast(
+                        bodyMargin: bodyMargin, textTheme: textTheme),
+                    topPodCastes(),
+                    const SizedBox(
+                      height: 65,
+                    ),
+                  ],
+                )
+              : const Center(child: Loading()),
         ),
       ),
     );
@@ -67,44 +74,50 @@ class HomeScreen extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
             // blog item
-            return Padding(
-              padding: EdgeInsets.only(right: index == 0 ? bodyMargin : 15),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SizedBox(
-                      height: size.height / 5.3,
-                      width: size.width / 2.4,
-                      child: CachedNetworkImage(
-                        imageUrl:
-                            homeScreenController.topVisitedList[index].image!,
-                        imageBuilder: (context, imageProvider) => Container(
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(16)),
-                              image: DecorationImage(
-                                image: imageProvider,
-                                fit: BoxFit.cover,
-                              )),
-                        ),
-                        placeholder: (context, url) => const loading(),
-                        errorWidget: (context, url, error) => const Icon(
-                          Icons.image_not_supported_outlined,
-                          size: 50,
-                          color: Colors.grey,
+            return GestureDetector(
+              onTap: () {
+                singleArticleController.getArticleInfo(
+                    homeScreenController.topVisitedList[index].id);
+              },
+              child: Padding(
+                padding: EdgeInsets.only(right: index == 0 ? bodyMargin : 15),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        height: size.height / 5.3,
+                        width: size.width / 2.4,
+                        child: CachedNetworkImage(
+                          imageUrl:
+                              homeScreenController.topVisitedList[index].image!,
+                          imageBuilder: (context, imageProvider) => Container(
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(16)),
+                                image: DecorationImage(
+                                  image: imageProvider,
+                                  fit: BoxFit.cover,
+                                )),
+                          ),
+                          placeholder: (context, url) => const Loading(),
+                          errorWidget: (context, url, error) => const Icon(
+                            Icons.image_not_supported_outlined,
+                            size: 50,
+                            color: Colors.grey,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                      width: size.width / 2.4,
-                      child: Text(
-                        homeScreenController.topVisitedList[index].title!,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                      ))
-                ],
+                    SizedBox(
+                        width: size.width / 2.4,
+                        child: Text(
+                          homeScreenController.topVisitedList[index].title!,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                        ))
+                  ],
+                ),
               ),
             );
           },
@@ -143,7 +156,7 @@ class HomeScreen extends StatelessWidget {
                                 fit: BoxFit.cover,
                               )),
                         ),
-                        placeholder: (context, url) => const loading(),
+                        placeholder: (context, url) => const Loading(),
                         errorWidget: (context, url, error) => const Icon(
                           Icons.image_not_supported_outlined,
                           size: 50,
@@ -168,8 +181,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget poster () {
-
+  Widget poster() {
     return Stack(
       children: [
         Container(
@@ -183,24 +195,22 @@ class HomeScreen extends StatelessWidget {
                 end: Alignment.bottomCenter),
           ),
           child: CachedNetworkImage(
-                        imageUrl:
-                            homeScreenController.poster.value.image!,
-                        imageBuilder: (context, imageProvider) => Container(
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(16)),
-                              image: DecorationImage(
-                                image: imageProvider,
-                                fit: BoxFit.cover,
-                              )),
-                        ),
-                        placeholder: (context, url) => const loading(),
-                        errorWidget: (context, url, error) => const Icon(
-                          Icons.image_not_supported_outlined,
-                          size: 50,
-                          color: Colors.grey,
-                        ),
-                      ),
+            imageUrl: homeScreenController.poster.value.image!,
+            imageBuilder: (context, imageProvider) => Container(
+              decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(Radius.circular(16)),
+                  image: DecorationImage(
+                    image: imageProvider,
+                    fit: BoxFit.cover,
+                  )),
+            ),
+            placeholder: (context, url) => const Loading(),
+            errorWidget: (context, url, error) => const Icon(
+              Icons.image_not_supported_outlined,
+              size: 50,
+              color: Colors.grey,
+            ),
+          ),
         ),
         Positioned(
           bottom: 8,
@@ -241,9 +251,23 @@ class HomeScreen extends StatelessWidget {
       ],
     );
   }
+
+  Widget tags() {
+    return SizedBox(
+      height: 60,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: homeScreenController.tagList.length,
+        itemBuilder: (context, index) {
+          return Padding(
+              padding:
+                  EdgeInsets.fromLTRB(0, 8, index == 0 ? bodyMargin : 15, 8),
+              child: MainTags(textTheme: textTheme, index: index));
+        },
+      ),
+    );
+  }
 }
-
-
 
 class SeeMorePadCast extends StatelessWidget {
   const SeeMorePadCast({
@@ -318,32 +342,3 @@ class SeeMoreBlog extends StatelessWidget {
     );
   }
 }
-
-class HomePageTageList extends StatelessWidget {
-  const HomePageTageList({
-    super.key,
-    required this.bodyMargin,
-    required this.textTheme,
-  });
-
-  final double bodyMargin;
-  final TextTheme textTheme;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 60,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: tagList.length,
-        itemBuilder: (context, index) {
-          return Padding(
-              padding:
-                  EdgeInsets.fromLTRB(0, 8, index == 0 ? bodyMargin : 15, 8),
-              child: MainTags(textTheme: textTheme, index: index));
-        },
-      ),
-    );
-  }
-}
-

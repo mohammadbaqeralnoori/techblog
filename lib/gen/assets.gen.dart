@@ -97,13 +97,24 @@ class $AssetsImagesGen {
   AssetGenImage get programming =>
       const AssetGenImage('assets/images/programming.png');
 
+  /// File path: assets/images/single_place_holder.jpg
+  AssetGenImage get singlePlaceHolder =>
+      const AssetGenImage('assets/images/single_place_holder.jpg');
+
   /// File path: assets/images/tecSplash.png
   AssetGenImage get tecSplash =>
       const AssetGenImage('assets/images/tecSplash.png');
 
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [poster1, poster2, poster3, poster4, programming, tecSplash];
+  List<AssetGenImage> get values => [
+        poster1,
+        poster2,
+        poster3,
+        poster4,
+        programming,
+        singlePlaceHolder,
+        tecSplash
+      ];
 }
 
 class Assets {

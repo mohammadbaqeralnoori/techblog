@@ -22,10 +22,13 @@ class SolidColors {
   static const Color metaTextTitle = Color.fromARGB(255, 97, 97, 97);
   static const Color labelTitle = Color.fromARGB(255, 44, 125, 180);
   static const Color arwbackBg = Color.fromARGB(255, 151, 120, 175);
+    static const Color greyColor = Color.fromARGB(255, 156, 156, 156);
+    static const Color lightIcon = Color.fromARGB(255, 255, 255, 255);
   static const Color arwback = Color.fromARGB(255, 255, 255, 255);
   static const Color divider = Color.fromARGB(255, 112, 112, 112);
   static const Color hintText = Color.fromARGB(255, 219, 219, 219);
   static const Color surface = Color.fromARGB(255, 242, 242, 242);
+  static const Color captionColor = Color.fromARGB(41, 0, 0, 0);
 }
 
 
@@ -36,6 +39,7 @@ class GradiantColors {
   static const List<Color> blogPost = [Color.fromARGB(255, 0, 0, 0),  Color.fromARGB(0, 0, 0, 0)];
   static const List<Color> posterCoverGradiant = [Color.fromARGB(0, 0, 0, 0), Color.fromARGB(195, 72, 20, 88),  Color.fromARGB(255, 28, 20, 81)];
   static const List<Color> imageBg = [Color.fromARGB(255, 46, 3, 71),  Color.fromARGB(0, 128, 128, 128)];
+  static const List<Color> singleAppbarGradiant = [Color.fromARGB(255, 46, 3, 71),  Color.fromARGB(0, 128, 128, 128)];
   static const List<Color> gradiantBackNavigator = [Color.fromARGB(255, 255, 255, 255),  Color.fromARGB(200, 255, 255, 255),  Color.fromARGB(0, 255, 255, 255)];
-  
+ 
 }

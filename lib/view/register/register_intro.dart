@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:techblog/controller/register_controller.dart';
 import 'package:techblog/gen/assets.gen.dart';
 import 'package:techblog/component/my_strings.dart';
-import 'package:techblog/view/my_cats.dart';
 import 'package:validators/validators.dart';
 
+// ignore: must_be_immutable
 class RegisterIntro extends StatelessWidget {
-  const RegisterIntro({super.key});
+  RegisterIntro({super.key});
+
+  RegisterController registerController = Get.put(RegisterController());
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +48,7 @@ class RegisterIntro extends StatelessWidget {
 
   Future<dynamic> _showEamilBottomSheet(
       BuildContext context, Size size, TextTheme textTheme) {
-        // RegExp isEmail = RegExp('^[a-z-0-9]+@');
+    // RegExp isEmail = RegExp('^[a-z-0-9]+@');
     return showModalBottomSheet(
       isScrollControlled: true,
       context: context,
@@ -71,11 +75,11 @@ class RegisterIntro extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(24),
                     child: TextField(
+                      controller: registerController.emailTextEditingController,
                       onChanged: (value) {
                         // print(value + " is Email = " + isEmail.hasMatch(value).toString());
                         isEmail(value);
-                        print(value + " is Email : "+ isEmail(value).toString());
-                     
+                        // print(value + " is Email : "+ isEmail(value).toString());
                       },
                       textAlign: TextAlign.center,
                       decoration: InputDecoration(
@@ -83,10 +87,13 @@ class RegisterIntro extends StatelessWidget {
                           hintStyle: textTheme.labelSmall),
                     ),
                   ),
-                  ElevatedButton(onPressed: () {
-                    Navigator.pop(context);
-                    _activateCodeBottomSheet(context, size, textTheme);
-                  }, child: const Text("ادامه"))
+                  ElevatedButton(
+                      onPressed: () async {
+                        registerController.register();
+                        Navigator.pop(context);
+                        _activateCodeBottomSheet(context, size, textTheme);
+                      },
+                      child: const Text("ادامه"))
                 ],
               ),
             ),
@@ -95,11 +102,10 @@ class RegisterIntro extends StatelessWidget {
       }),
     );
   }
-}
 
- Future<dynamic> _activateCodeBottomSheet(
+  Future<dynamic> _activateCodeBottomSheet(
       BuildContext context, Size size, TextTheme textTheme) {
-        // RegExp isEmail = RegExp('^[a-z-0-9]+@');
+    // RegExp isEmail = RegExp('^[a-z-0-9]+@');
     return showModalBottomSheet(
       isScrollControlled: true,
       context: context,
@@ -126,21 +132,25 @@ class RegisterIntro extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(24),
                     child: TextField(
+                      controller:
+                          registerController.activedCodeTextEditingController,
                       onChanged: (value) {
                         // print(value + " is Email = " + isEmail.hasMatch(value).toString());
                         isEmail(value);
-                        print(value + " is Email : "+ isEmail(value).toString());
-                     
+                        // print(value + " is Email : "+ isEmail(value).toString());
                       },
                       textAlign: TextAlign.center,
                       decoration: InputDecoration(
-                          hintText: "******",
-                          hintStyle: textTheme.labelSmall),
+                          hintText: "******", hintStyle: textTheme.labelSmall),
                     ),
                   ),
-                  ElevatedButton(onPressed: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>const MyCats()));
-                  }, child: const Text("ادامه"))
+                  ElevatedButton(
+                      onPressed: () {
+                        registerController.verify();
+                        // Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        //     builder: (context) => const MyCats()));
+                      },
+                      child: const Text("ادامه"))
                 ],
               ),
             ),
@@ -149,4 +159,4 @@ class RegisterIntro extends StatelessWidget {
       }),
     );
   }
-
+}

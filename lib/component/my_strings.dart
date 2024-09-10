@@ -27,6 +27,17 @@ www.sasansafari.com
 
   static const String successfullRegistration = """ تبریک میگم ، ایمیل با موفقیت تایید شد
 لطفا اطلاعات ثبت نام رو کامل کن """;
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ static String visit = 'بازدید';
 }
+
 
 

@@ -88,7 +88,7 @@ class _MyCatsState extends State<MyCats> {
                                   if(!selectedTags.contains(tagList[index])) {
                                   selectedTags.add(tagList[index]);
                                   } else {
-                                    print("${tagList[index].title} exist)");
+                                    // print("${tagList[index].title} exist)");
                                   }
 
                                 });
@@ -155,7 +155,7 @@ class _MyCatsState extends State<MyCats> {
                                       selectedTags.removeAt(index);
                                     });
                                     },
-                                    child: Icon(
+                                    child: const Icon(
                                       CupertinoIcons.delete,
                                       color: Colors.grey,
                                       size: 20,
