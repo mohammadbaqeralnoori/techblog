@@ -5,7 +5,7 @@ import 'package:techblog/component/my_component.dart';
 import 'package:techblog/constant/my_strings.dart';
 import 'package:techblog/controller/articles/list_article_controller.dart';
 import 'package:techblog/controller/articles/single_article_controller.dart';
-import 'package:techblog/main.dart';
+import 'package:techblog/route_manager/names.dart';
 
 
 // ignore: must_be_immutable

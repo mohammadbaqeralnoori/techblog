@@ -1,21 +1,13 @@
-
-
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:techblog/binding.dart';
 import 'package:techblog/constant/my_colors.dart';
-import 'package:techblog/my_http_overrides.dart';
-import 'package:techblog/view/articles/manage_article.dart';
-import 'package:techblog/view/articles/single.dart';
-import 'package:techblog/view/articles/single_manage_article.dart';
-import 'package:techblog/view/main_screen/main_screen.dart';
-import 'package:techblog/view/podcast/single_podcast.dart';
-import 'package:techblog/view/splash_screen.dart';
+import 'package:techblog/route_manager/names.dart';
+import 'package:techblog/route_manager/pages.dart';
+import 'my_http_overrides.dart';
+
 
 
 void main() async {
@@ -38,37 +30,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
     return GetMaterialApp(
-        debugShowCheckedModeBanner: false,
+      initialRoute: NamedRoute.initialRoute,
         locale: const Locale('fa'),
-        getPages: [
-          GetPage(
-              name: NamedRoute.routeMainScreen,
-              page: () => MainScreen(),
-              binding: RegisterBinging()),
-          GetPage(
-              name: NamedRoute.routeSingleArticle,
-              page: () => Single(),
-              binding: ArticleBinding()),
-          GetPage(
-              name: NamedRoute.manageArticle,
-              page: () => ManageArticle(),
-              binding: ArticleManagerBinding()),
-          GetPage(
-              name: NamedRoute.singleManageArticle,
-              page: () => SingleManageArticle(),
-              binding: ArticleManagerBinding()),
-          GetPage(
-              name: NamedRoute.singlePodcast,
-              page: () => SinglePodcast(),
-          ),
-        ],
         theme: lightTheme(textTheme),
-        // home:  HtmlEditorExample(title: 'content',),
-        home: const SplashScreen(),
-        // home: SinglePodcast(),
-        // home: MainScreen()
-        // home: ArticleListScreen(title: 'مقالات جدید',)
-        // home: Single(),
+        debugShowCheckedModeBanner: false,
+        getPages: Pages.pages,
         );
   }
 
@@ -152,13 +118,4 @@ class MyApp extends StatelessWidget {
 
 
 
-class NamedRoute {
 
-  NamedRoute._();
-static String routeMainScreen = "/MainScreen";
-static String routeSingleArticle = "/SingleArticle";
-static String manageArticle = "/ManageArticle";
-static String singleManageArticle = "/SingleManageArticle";
-static String singlePodcast = "/SinglePodcast";
-  
-}

@@ -5,7 +5,8 @@ import 'package:techblog/component/my_component.dart';
 import 'package:techblog/constant/my_strings.dart';
 import 'package:techblog/controller/articles/manage_article_controller.dart';
 import 'package:techblog/gen/assets.gen.dart';
-import 'package:techblog/main.dart';
+
+import 'package:techblog/route_manager/names.dart';
 
 // ignore: must_be_immutable
 class ManageArticle extends StatelessWidget {

@@ -4,11 +4,12 @@ import 'package:get/get.dart';
 import 'package:techblog/controller/home_screen_controller.dart';
 import 'package:techblog/controller/articles/single_article_controller.dart';
 import 'package:techblog/gen/assets.gen.dart';
-import 'package:techblog/main.dart';
+
 import 'package:techblog/models/fake_data.dart';
 import 'package:techblog/constant/my_colors.dart';
 import 'package:techblog/constant/my_strings.dart';
 import 'package:techblog/component/my_component.dart';
+import 'package:techblog/route_manager/names.dart';
 import 'package:techblog/view/articles/artical_list_screen.dart';
 
 // ignore: must_be_immutable
