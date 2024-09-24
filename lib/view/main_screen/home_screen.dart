@@ -2,13 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:techblog/controller/home_screen_controller.dart';
-import 'package:techblog/controller/single_article_controller.dart';
+import 'package:techblog/controller/articles/single_article_controller.dart';
 import 'package:techblog/gen/assets.gen.dart';
+import 'package:techblog/main.dart';
 import 'package:techblog/models/fake_data.dart';
-import 'package:techblog/component/my_colors.dart';
-import 'package:techblog/component/my_strings.dart';
+import 'package:techblog/constant/my_colors.dart';
+import 'package:techblog/constant/my_strings.dart';
 import 'package:techblog/component/my_component.dart';
-import 'package:techblog/view/artical_list_screen.dart';
+import 'package:techblog/view/articles/artical_list_screen.dart';
 
 // ignore: must_be_immutable
 class HomeScreen extends StatelessWidget {
@@ -46,7 +47,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () => Get.to(ArticleListScreen(title: 'مقالات',)),
-                      child: SeeMoreBlog(bodyMargin: bodyMargin, textTheme: textTheme)),
+                      child: SeeMoreBlog(bodyMargin: bodyMargin, textTheme: textTheme, title: MyStrings.viewHotestBlog,)),
                     topVisited(),
                     const SizedBox(
                       height: 32,
@@ -135,44 +136,49 @@ class HomeScreen extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
             // blog item
-            return Padding(
-              padding: EdgeInsets.only(right: index == 0 ? bodyMargin : 15),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SizedBox(
-                      height: size.height / 5.3,
-                      width: size.width / 2.4,
-                      child: CachedNetworkImage(
-                        imageUrl:
-                            homeScreenController.topPodcasts[index].poster!,
-                        imageBuilder: (context, imageProvider) => Container(
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(16)),
-                              image: DecorationImage(
-                                image: imageProvider,
-                                fit: BoxFit.cover,
-                              )),
-                        ),
-                        placeholder: (context, url) => const Loading(),
-                        errorWidget: (context, url, error) => const Icon(
-                          Icons.image_not_supported_outlined,
-                          size: 50,
-                          color: Colors.grey,
+            return GestureDetector(
+              onTap: () {
+                Get.toNamed(NamedRoute.singlePodcast, arguments: homeScreenController.topPodcasts[index]);
+              },
+              child: Padding(
+                padding: EdgeInsets.only(right: index == 0 ? bodyMargin : 15),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        height: size.height / 5.3,
+                        width: size.width / 2.4,
+                        child: CachedNetworkImage(
+                          imageUrl:
+                              homeScreenController.topPodcasts[index].poster!,
+                          imageBuilder: (context, imageProvider) => Container(
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(16)),
+                                image: DecorationImage(
+                                  image: imageProvider,
+                                  fit: BoxFit.cover,
+                                )),
+                          ),
+                          placeholder: (context, url) => const Loading(),
+                          errorWidget: (context, url, error) => const Icon(
+                            Icons.image_not_supported_outlined,
+                            size: 50,
+                            color: Colors.grey,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                      width: size.width / 2.4,
-                      child: Text(
-                        homeScreenController.topPodcasts[index].title!,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                      )),
-                ],
+                    SizedBox(
+                        width: size.width / 2.4,
+                        child: Text(
+                          homeScreenController.topPodcasts[index].title!,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                        )),
+                  ],
+                ),
               ),
             );
           },
@@ -243,8 +249,11 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              Text(homeScreenController.poster.value.title!,
-                  style: textTheme.headlineSmall)
+              Padding(
+                padding: const EdgeInsets.fromLTRB(2, 5, 16, 5),
+                child: Text(homeScreenController.poster.value.title!,
+                    style: textTheme.headlineSmall),
+              )
             ],
           ),
         )
@@ -297,7 +306,7 @@ class SeeMorePadCast extends StatelessWidget {
             width: 8,
           ),
           Text(
-            MyStrings.viewHotestBlog,
+            MyStrings.viewHotestPodCasts,
             style: textTheme.bodyMedium,
           ),
         ],
@@ -306,39 +315,3 @@ class SeeMorePadCast extends StatelessWidget {
   }
 }
 
-class SeeMoreBlog extends StatelessWidget {
-  const SeeMoreBlog({
-    super.key,
-    required this.bodyMargin,
-    required this.textTheme,
-  });
-
-  final double bodyMargin;
-  final TextTheme textTheme;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        right: bodyMargin,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          ImageIcon(
-            Assets.icons.bluePen.provider(),
-            color: SolidColors.seeMore,
-            size: 20,
-          ),
-          const SizedBox(
-            width: 8,
-          ),
-          Text(
-            MyStrings.viewHotestBlog,
-            style: textTheme.bodyMedium,
-          ),
-        ],
-      ),
-    );
-  }
-}

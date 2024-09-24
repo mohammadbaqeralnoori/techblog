@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:techblog/gen/assets.gen.dart';
 // import 'package:techblog/models/data_models.dart';
 import 'package:techblog/models/fake_data.dart';
-import 'package:techblog/component/my_colors.dart';
+import 'package:techblog/constant/my_colors.dart';
 import 'package:techblog/component/my_component.dart';
-import 'package:techblog/component/my_strings.dart';
+import 'package:techblog/constant/my_strings.dart';
 
 class MyCats extends StatefulWidget {
   const MyCats({super.key});

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:techblog/component/decorations.dart';
+import 'package:techblog/component/dimens.dart';
 import 'package:techblog/component/my_component.dart';
-import 'package:techblog/component/my_strings.dart';
+import 'package:techblog/constant/my_strings.dart';
+import 'package:techblog/controller/register_controller.dart';
 import 'package:techblog/gen/assets.gen.dart';
-import 'package:techblog/component/my_colors.dart';
+import 'package:techblog/constant/my_colors.dart';
 import 'package:techblog/view/main_screen/home_screen.dart';
 import 'package:techblog/view/main_screen/profile_screen.dart';
-import 'package:techblog/view/register/register_intro.dart';
 
 final GlobalKey<ScaffoldState> _key = GlobalKey();
 
@@ -20,15 +22,15 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
      var textTheme = Theme.of(context).textTheme;
-    var size = MediaQuery.of(context).size;
-    double bodyMargin = size.width / 10;
+     var size = MediaQuery.of(context).size;
+
     return SafeArea(
       child: Scaffold(
         key: _key,
         drawer: Drawer(
           backgroundColor: SolidColors.scafoldBg,
           child: Padding(
-            padding: EdgeInsets.only(right: bodyMargin, left: bodyMargin),
+            padding: EdgeInsets.only(right: Dimens.bodyMargin, left: Dimens.bodyMargin),
             child: ListView(
               children: [
                 DrawerHeader(
@@ -125,17 +127,17 @@ class MainScreen extends StatelessWidget {
                       HomeScreen(
                           size: size,
                           textTheme: textTheme,
-                          bodyMargin: bodyMargin),
+                          bodyMargin: Dimens.bodyMargin),
                       ProfileScreen(
                           size: size,
                           textTheme: textTheme,
-                          bodyMargin: bodyMargin),
+                          bodyMargin: Dimens.bodyMargin),
                     ],
                   ),
                 )),
                 BottomNav(
                   size: size,
-                  bodyMargin: bodyMargin,
+                  bodyMargin: Dimens.bodyMargin,
                   changeScreen: (int value) {
                     selectedPageIndex.value = value;
                   },
@@ -149,8 +151,9 @@ class MainScreen extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class BottomNav extends StatelessWidget {
-  const BottomNav({
+ const BottomNav({
     super.key,
     required this.size,
     required this.bodyMargin,
@@ -181,9 +184,7 @@ class BottomNav extends StatelessWidget {
           ),
           child: Container(
             height: size.height / 8,
-            decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(18)),
-                gradient: LinearGradient(colors: GradiantColors.bottomNav)),
+            decoration: Decorations.mainGradiant,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -194,8 +195,8 @@ class BottomNav extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: (() {
-                    //TODO chack status login Tatus
-                    Get.to( RegisterIntro());
+                    Get.find<RegisterController>().toggleLogin();
+                    // Get.to( RegisterIntro());
                   }),
                   icon: ImageIcon(Assets.icons.writeNavIcon.provider()),
                   color: Colors.white,

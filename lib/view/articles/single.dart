@@ -3,17 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:techblog/component/my_colors.dart';
+import 'package:techblog/constant/my_colors.dart';
 import 'package:techblog/component/my_component.dart';
-import 'package:techblog/controller/list_article_controller.dart';
-import 'package:techblog/controller/single_article_controller.dart';
+import 'package:techblog/controller/articles/list_article_controller.dart';
+import 'package:techblog/controller/articles/single_article_controller.dart';
 import 'package:techblog/gen/assets.gen.dart';
-import 'package:techblog/view/artical_list_screen.dart';
+import 'package:techblog/view/articles/artical_list_screen.dart';
 
 // ignore: must_be_immutable
 class Single extends StatelessWidget {
-  SingleArticleController singleArticleController =
-      Get.put(SingleArticleController());
+  var singleArticleController = Get.find<SingleArticleController>();
 
   Single({super.key});
 
@@ -27,151 +26,146 @@ class Single extends StatelessWidget {
         child: Obx(
           () => singleArticleController.articleInfoModel.value.title == null
               ? SizedBox(height: Get.height, child: const Loading())
-              : Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      Stack(
-                        children: [
-                          CachedNetworkImage(
-                            imageUrl: singleArticleController
-                                .articleInfoModel.value.image!,
-                            imageBuilder: ((context, imageProvider) =>
-                                Image(image: imageProvider)),
-                            placeholder: ((context, url) => const Loading()),
-                            errorWidget: ((context, url, error) => Image.asset(
-                                Assets.images.singlePlaceHolder.path)),
-                          ),
-                          Positioned(
-                            top: 0,
-                            left: 0,
-                            right: 0,
-                            child: Container(
-                              height: 60,
-                              decoration: const BoxDecoration(
-                                  gradient: LinearGradient(
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      colors:
-                                          GradiantColors.singleAppbarGradiant)),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  const SizedBox(
-                                    width: 20,
+              : Column(
+                  children: [
+                    Stack(
+                      children: [
+                        CachedNetworkImage(
+                          imageUrl: singleArticleController
+                              .articleInfoModel.value.image!,
+                          imageBuilder: ((context, imageProvider) =>
+                              Image(image: imageProvider)),
+                          placeholder: ((context, url) => const Loading()),
+                          errorWidget: ((context, url, error) => Image.asset(
+                              Assets.images.singlePlaceHolder.path)),
+                        ),
+                        Positioned(
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          child: Container(
+                            height: 60,
+                            decoration: const BoxDecoration(
+                                gradient: LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors:
+                                        GradiantColors.singleAppbarGradiant)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                                GestureDetector(
+                                  onTap: (() => Get.back()),
+                                  child: const Icon(
+                                    Icons.arrow_back,
+                                    color: Colors.white,
+                                    size: 24,
                                   ),
-                                  GestureDetector(
-                                    onTap: (() => Get.back()),
-                                    child: const Icon(
-                                      Icons.arrow_back,
-                                      color: Colors.white,
-                                      size: 24,
-                                    ),
+                                ),
+                                const Expanded(child: SizedBox()),
+                                GestureDetector(
+                                  onTap: () {
+                                    /// will added to your bookmark list
+                                  },
+                                  child: const Icon(
+                                    Icons.bookmark_border_rounded,
+                                    color: Colors.white,
+                                    size: 24,
                                   ),
-                                  const Expanded(child: SizedBox()),
-                                  GestureDetector(
-                                    onTap: () {
-                                      /// will added to your bookmark list
-                                    },
-                                    child: const Icon(
-                                      Icons.bookmark_border_rounded,
-                                      color: Colors.white,
-                                      size: 24,
-                                    ),
+                                ),
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                                GestureDetector(
+                                  onTap: () async {
+                                    await Share.share(singleArticleController
+                                        .articleInfoModel.value.title!);
+                                  },
+                                  child: const Icon(
+                                    Icons.share,
+                                    size: 24,
+                                    color: Colors.white,
                                   ),
-                                  const SizedBox(
-                                    width: 20,
-                                  ),
-                                  GestureDetector(
-                                    onTap: () async {
-                                      await Share.share(singleArticleController
-                                          .articleInfoModel.value.title!);
-                                    },
-                                    child: const Icon(
-                                      Icons.share,
-                                      size: 24,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 20,
-                                  ),
-                                ],
-                              ),
+                                ),
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                              ],
                             ),
-                          )
+                          ),
+                        )
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        singleArticleController.articleInfoModel.value.title!,
+                        maxLines: 2,
+                        style: textTheme.bodyLarge,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Image(
+                              height: 50,
+                              image: Image.asset(Assets.icons.profileIcon.path)
+                                  .image),
+                          const SizedBox(
+                            width: 16,
+                          ),
+                          Text(
+                            singleArticleController
+                                .articleInfoModel.value.author!,
+                            style: textTheme.bodySmall,
+                          ),
+                          const SizedBox(
+                            width: 16,
+                          ),
+                          Text(
+                            singleArticleController
+                                .articleInfoModel.value.createdAt!,
+                            style: const TextStyle(
+                                color: SolidColors.greyColor,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500),
+                          ),
                         ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          singleArticleController.articleInfoModel.value.title!,
-                          maxLines: 2,
-                          style: textTheme.bodyLarge,
-                        ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: HtmlWidget(
+                        singleArticleController.articleInfoModel.value.content!,
+                        textStyle: textTheme.bodyLarge,
+                        enableCaching: true,
+                        onLoadingBuilder:
+                            ((context, element, loadingProgress) =>
+                                const Loading()),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Image(
-                                height: 50,
-                                image:
-                                    Image.asset(Assets.icons.profileIcon.path)
-                                        .image),
-                            const SizedBox(
-                              width: 16,
-                            ),
-                            Text(
-                              singleArticleController
-                                  .articleInfoModel.value.author!,
-                              style: textTheme.bodySmall,
-                            ),
-                            const SizedBox(
-                              width: 16,
-                            ),
-                            Text(
-                              singleArticleController
-                                  .articleInfoModel.value.createdAt!,
-                              style: const TextStyle(
-                                  color: SolidColors.greyColor,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: HtmlWidget(
-                          singleArticleController
-                              .articleInfoModel.value.content!,
-                          textStyle: textTheme.bodyLarge,
-                          enableCaching: true,
-                          onLoadingBuilder:
-                              ((context, element, loadingProgress) =>
-                                  const Loading()),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 25,
-                      ),
-                      Tags(
-                        textheme: textTheme,
-                        singleArticleController: singleArticleController,
-                      ),
-                      const SizedBox(
-                        height: 25,
-                      ),
-                      Similar(
-                        textheme: textTheme,
-                        singleArticleController: singleArticleController,
-                      ),
-                      const SizedBox(
-                        height: 25,
-                      ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    Tags(
+                      textheme: textTheme,
+                      singleArticleController: singleArticleController,
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    Similar(
+                      textheme: textTheme,
+                      singleArticleController: singleArticleController,
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                  ],
                 ),
         ),
       ),
@@ -272,8 +266,8 @@ class Similar extends StatelessWidget {
                               imageBuilder: ((context, imageProvider) =>
                                   Container(
                                     decoration: BoxDecoration(
-                                      borderRadius:
-                                          const BorderRadius.all(Radius.circular(25)),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(25)),
                                       image: DecorationImage(
                                           image: imageProvider,
                                           fit: BoxFit.cover),
@@ -304,14 +298,16 @@ class Similar extends StatelessWidget {
                                   Text(
                                     singleArticleController
                                         .relatedList[index].author!,
-                                    style: const TextStyle(color: Colors.white, fontSize: 13),
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 13),
                                   ),
                                   Row(
                                     children: [
                                       Text(
                                         singleArticleController
                                             .relatedList[index].view!,
-                                        style: const TextStyle(color: Colors.white, fontSize: 13),
+                                        style: const TextStyle(
+                                            color: Colors.white, fontSize: 13),
                                       ),
                                       const SizedBox(
                                         width: 5,

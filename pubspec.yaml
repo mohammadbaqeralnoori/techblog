@@ -46,6 +46,13 @@ dependencies:
   responsive_framework: ^1.5.1
   flutter_widget_from_html: ^0.15.2
   get_storage: ^2.1.1
+  file_picker: ^8.1.2
+  html_editor_enhanced: ^2.6.0
+  percent_indicator: ^4.2.3
+  just_audio: ^0.9.40
+  audio_video_progress_bar: ^2.0.3
+
+
 
 dev_dependencies:
   flutter_test:

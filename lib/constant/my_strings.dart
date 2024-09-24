@@ -18,6 +18,8 @@ class MyStrings {
 
 برای ارسال مطلب و پادکست باید حتما 
 ثبت نام کنی """;
+  static const String articleEmpty = """هنوز هیچ مقاله ای به جامعه گیک های فارسی 
+اضافه نکردی !!!""";
   static const String shareText = """
 من از تگ بلاگ استفاده می کنم و خیلی با حاله و تو هم داشته باش\n
 

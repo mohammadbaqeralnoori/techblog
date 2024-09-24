@@ -39,7 +39,7 @@ class GradiantColors {
   static const List<Color> blogPost = [Color.fromARGB(255, 0, 0, 0),  Color.fromARGB(0, 0, 0, 0)];
   static const List<Color> posterCoverGradiant = [Color.fromARGB(0, 0, 0, 0), Color.fromARGB(195, 72, 20, 88),  Color.fromARGB(255, 28, 20, 81)];
   static const List<Color> imageBg = [Color.fromARGB(255, 46, 3, 71),  Color.fromARGB(0, 128, 128, 128)];
-  static const List<Color> singleAppbarGradiant = [Color.fromARGB(255, 46, 3, 71),  Color.fromARGB(0, 128, 128, 128)];
+  static const List<Color> singleAppbarGradiant = [Color.fromARGB(255, 46, 3, 71),  Color.fromARGB(0, 0, 0, 0)];
   static const List<Color> gradiantBackNavigator = [Color.fromARGB(255, 255, 255, 255),  Color.fromARGB(200, 255, 255, 255),  Color.fromARGB(0, 255, 255, 255)];
  
 }

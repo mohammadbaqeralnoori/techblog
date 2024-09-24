@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:techblog/controller/register_controller.dart';
 import 'package:techblog/gen/assets.gen.dart';
-import 'package:techblog/component/my_strings.dart';
+import 'package:techblog/constant/my_strings.dart';
 import 'package:validators/validators.dart';
 
 // ignore: must_be_immutable
 class RegisterIntro extends StatelessWidget {
   RegisterIntro({super.key});
 
-  RegisterController registerController = Get.put(RegisterController());
+  // RegisterController registerController = Get.put(RegisterController());
+  var registerController = Get.find<RegisterController>();
 
   @override
   Widget build(BuildContext context) {
@@ -147,8 +148,6 @@ class RegisterIntro extends StatelessWidget {
                   ElevatedButton(
                       onPressed: () {
                         registerController.verify();
-                        // Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        //     builder: (context) => const MyCats()));
                       },
                       child: const Text("ادامه"))
                 ],

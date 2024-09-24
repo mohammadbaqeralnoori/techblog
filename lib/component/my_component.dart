@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:techblog/component/text_style.dart';
 import 'package:techblog/controller/home_screen_controller.dart';
 import 'package:techblog/gen/assets.gen.dart';
-import 'package:techblog/component/my_colors.dart';
+import 'package:techblog/constant/my_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TechDivider extends StatelessWidget {
@@ -112,17 +112,22 @@ PreferredSize appBar(String title) {
             child: Center(
                 child: Text(title, style: appBarTextStyle)))
         ],
-        leading: Padding(
-          padding: const EdgeInsets.only(right: 16),
-          child: Container(
-            height: 40,
-            width: 40,
-            decoration: BoxDecoration(
-                color: SolidColors.primeryColor.withBlue(100),
-                shape: BoxShape.circle),
-            child: const Icon(
-              Icons.keyboard_arrow_right_rounded,
-              color: Colors.white,
+        leading: GestureDetector(
+          onTap: () {
+            Get.back();
+          },
+          child: Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: Container(
+              height: 40,
+              width: 40,
+              decoration: BoxDecoration(
+                  color: SolidColors.primeryColor.withBlue(100),
+                  shape: BoxShape.circle),
+              child: const Icon(
+                Icons.keyboard_arrow_right_rounded,
+                color: Colors.white,
+              ),
             ),
           ),
         ),
@@ -158,7 +163,7 @@ class SeeMoreBlog extends StatelessWidget {
           ),
           Text(
             title,
-            style: textTheme.displaySmall,
+            style: textTheme.bodyMedium,
           )
         ],
       ),

@@ -2,43 +2,35 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:techblog/component/my_component.dart';
-import 'package:techblog/component/my_strings.dart';
-import 'package:techblog/controller/list_article_controller.dart';
-import 'package:techblog/controller/single_article_controller.dart';
-import 'package:techblog/view/single.dart';
+import 'package:techblog/constant/my_strings.dart';
+import 'package:techblog/controller/articles/manage_article_controller.dart';
+import 'package:techblog/gen/assets.gen.dart';
+import 'package:techblog/main.dart';
 
 // ignore: must_be_immutable
-class ArticleListScreen extends StatelessWidget {
-  String title;
-  ArticleListScreen({required this.title, super.key});
-  ListArticleController listarticleController =
-      Get.put(ListArticleController());
-  SingleArticleController singleArticleController =
-      Get.put(SingleArticleController());
+class ManageArticle extends StatelessWidget {
+  ManageArticle({super.key});
+
+  var articleManageController = Get.find<ManageArticleController>();
 
   @override
   Widget build(BuildContext context) {
-    // var size = MediaQuery.of(context).size;
     var textTheme = Theme.of(context).textTheme;
+    // var size = MediaQuery.of(context).size;
     return SafeArea(
         child: Scaffold(
-      appBar: appBar(title),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SizedBox(
-          child: Obx(
-            () => !singleArticleController.loading.value
+      appBar: appBar("مدیریت مقاله ها"),
+      body: Obx(
+        () => articleManageController.Loading.value
+            ? const Loading()
+            : articleManageController.articleList.isNotEmpty
                 ? ListView.builder(
                     scrollDirection: Axis.vertical,
-                    itemCount: listarticleController.articleList.length,
+                    itemCount: articleManageController.articleList.length,
                     itemBuilder: ((context, index) {
                       return GestureDetector(
-                        onTap: (() {
-                          // singleArticleController.id.value = int.parse(
-                          //     listarticleController.articleList[index].id.toString());
-                          // Get.to(() => Single());
-                          singleArticleController.getArticleInfo(
-                              listarticleController.articleList[index].id);
+                        onTap: (() async {
+                          // route to single manage
                         }),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -46,12 +38,10 @@ class ArticleListScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               SizedBox(
-                                // width: size.width / 3.8,
-                                // height: size.height / 6.9,
-                                width: Get.width / 3.5,
-                                height: Get.width / 6,
+                                height: Get.height / 6,
+                                width: Get.width / 3,
                                 child: CachedNetworkImage(
-                                  imageUrl: listarticleController
+                                  imageUrl: articleManageController
                                       .articleList[index].image!,
                                   imageBuilder: (((context, imageProvider) {
                                     return Container(
@@ -84,7 +74,7 @@ class ArticleListScreen extends StatelessWidget {
                                       // width: size.width / 1.7,
                                       width: Get.width / 2,
                                       child: Text(
-                                          listarticleController
+                                          articleManageController
                                               .articleList[index].title!,
                                           style: textTheme.bodySmall,
                                           overflow: TextOverflow.ellipsis,
@@ -100,7 +90,7 @@ class ArticleListScreen extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        listarticleController
+                                        articleManageController
                                             .articleList[index].author!,
                                         style: textTheme.labelMedium,
                                       ),
@@ -108,8 +98,7 @@ class ArticleListScreen extends StatelessWidget {
                                         width: 80,
                                       ),
                                       Text(
-                                        "${listarticleController
-                                                .articleList[index].view!} ${MyStrings.visit}",
+                                        "${articleManageController.articleList[index].view!} ${MyStrings.visit}",
                                         style: textTheme.labelMedium,
                                       ),
                                     ],
@@ -122,10 +111,41 @@ class ArticleListScreen extends StatelessWidget {
                       );
                     }),
                   )
-                : const Loading(),
-          ),
-        ),
+                : articleEmptyState(textTheme),
       ),
+      bottomNavigationBar: Padding(
+          padding: const EdgeInsets.only(top: 32),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              style: ButtonStyle(fixedSize: WidgetStateProperty.all(Size(Get.width / 3, 56))),
+                onPressed: () {
+                  Get.toNamed(NamedRoute.singleManageArticle);
+                },
+                child: Text("بریم برای نوشتن یه مقاله باحال",
+                    style: textTheme.headlineSmall)),
+          )),
     ));
+  }
+
+  Widget articleEmptyState(TextTheme textTheme) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image(
+            image: Assets.images.tcbotEmpty.provider(),
+            height: 100,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 16),
+            child: RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                    text: MyStrings.articleEmpty, style: textTheme.bodySmall)),
+          ),
+        ],
+      ),
+    );
   }
 }

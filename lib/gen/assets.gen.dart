@@ -101,6 +101,10 @@ class $AssetsImagesGen {
   AssetGenImage get singlePlaceHolder =>
       const AssetGenImage('assets/images/single_place_holder.jpg');
 
+  /// File path: assets/images/tcbot_empty.png
+  AssetGenImage get tcbotEmpty =>
+      const AssetGenImage('assets/images/tcbot_empty.png');
+
   /// File path: assets/images/tecSplash.png
   AssetGenImage get tecSplash =>
       const AssetGenImage('assets/images/tecSplash.png');
@@ -113,6 +117,7 @@ class $AssetsImagesGen {
         poster4,
         programming,
         singlePlaceHolder,
+        tcbotEmpty,
         tecSplash
       ];
 }
